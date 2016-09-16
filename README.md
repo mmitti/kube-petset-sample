@@ -1,6 +1,18 @@
 # kube-petset-sample
 KubernetesのPetSetの挙動を確認するために作成したサンプルです。  
 2つのコンテナで構成されています。
+
+## 使い方
+```
+kubectl create -f pv.yaml
+kubectl create -f test-db.yaml
+kubectl create -f test-db-client.yaml
+```
+
+あとは  
+http://kubernetes masterのIP:kubernetes APIのポート番号/api/v1/proxy/namespaces/default/services/test-db-client:5000  
+にアクセスすれば動きます。
+
 ## test-db
 DBコンテナとして作成しました。（実際はただのjsonファイルを読み書きするAPIサーバーです。  
 8000番ポートにHTTPアクセスするとjsonの内容を取得したり追記したり出来ます。  
