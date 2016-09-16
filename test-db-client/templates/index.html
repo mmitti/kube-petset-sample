@@ -1,0 +1,59 @@
+<HTML>
+  <BODY>
+    <H1>
+      VIEW
+    </H1>
+    <TABLE border="1">
+      <TR>
+        <TH>HostName</TH>
+        <TD>{{view_host}}</TD>
+      </TR>
+    </TABLE>
+
+    <H1>
+      API
+    </H1>
+    <TABLE border="1">
+      <TR>
+        <TH>INIT HOST</TH>
+        <TH>CURRENT HOST</TH>
+        <TH>INIT TIME</TH>
+        <TH>TIME</TH>
+      </TR>
+      <TR>
+        <TD>{{info.init_host}}</TD>
+        <TD>{{info.current_host}}</TD>
+        <TD>{{info.init_time}}</TD>
+        <TD>{{info.time}}</TD>
+      </TR>
+    </TABLE>
+
+    <H1>
+      DATA
+    </H1>
+    <TABLE border="1">
+      <TR>
+        <TH>DB HOST</TH>
+        <TH>WRITE HOST</TH>
+        <TH>TIME</TH>
+        <TH>TEXT</TH>
+      </TR>
+      {% for i in data %}
+      <TR>
+        <TD>{{i.dbhost}}</TD>
+        <TD>{{i.apihost}}</TD>
+        <TD>{{i.time}}</TD>
+        <TD>{{i.data}}</TD>
+      </TR>
+      {% endfor %}
+    </TABLE>
+    <BR>
+
+    <FORM action="{{url}}" method="post">
+      <INPUT name="text"></INPUT>
+      <input type="hidden" name="room" value="{{room}}" />
+      <BUTTON>ADD</BUTTON>
+    </FORM>
+
+  </BODY>
+</HTML>

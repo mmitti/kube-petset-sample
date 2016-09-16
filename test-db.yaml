@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-db
+  labels:
+    app: test-db
+spec:
+  ports:
+  - port: 8000
+    name: test-db
+  clusterIP: None
+  selector:
+    app: test-db
+---
+apiVersion: apps/v1alpha1
+kind: PetSet
+metadata:
+  name: test-db
+spec:
+  serviceName: "test-db"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: test-db
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: test-db
+        image: mmitti/test-db
+        ports:
+        - containerPort: 8000
+          name: test-db
+        volumeMounts:
+        - name: pv
+          mountPath: /db
+  volumeClaimTemplates:
+  - metadata:
+      name: pv
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      resources:
+        requests:
+          storage: 5Mi

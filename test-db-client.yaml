@@ -1,0 +1,39 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: test-db-client
+  labels:
+    app: test-db-client
+spec:
+  replicas: 2
+  selector:
+    app: test-db-client
+  template:
+    metadata:
+      name: test-db-client
+      labels:
+        app: test-db-client
+    spec:
+      containers:
+      - name: test-db-client
+        image: mmitti/test-db-client
+        env:
+        - name: API
+          value: test-db.default.svc.mmitti.info
+        - name: API_POD
+          value: test-db.default.svc.mmitti.info
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: test-db-client
+  labels:
+    app: test-db-client
+spec:
+  ports:
+  - name: tcp
+    protocol: TCP
+    port: 5000
+    targetPort: 5000
+  selector:
+    app: test-db-client
