@@ -13,6 +13,18 @@ kubectl create -f test-db-client.yaml
 http://kubernetes masterのIP:kubernetes APIのポート番号/api/v1/proxy/namespaces/default/services/test-db-client:5000  
 にアクセスすれば動きます。
 
+## アクセスした画面について
+![](https://raw.githubusercontent.com/mmitti/kube-petset-sample/master/img.png "サンプル")
+- View  
+  test-db-clientのホスト名を表示しています。
+- API  
+  test-dbの現在接続しているホスト名、現在接続しているtest-dbホストが読み込んでいるjsonファイルを生成したホスト名などが表示されています。
+- Data
+  書き込み処理を行ったtest-dbホスト名(DB HOST)、書き込み処理を要求したtest-db-clientのホスト名(WRITE HOST)、書き込まれたテキストなどが表示されています。  
+  なお、テキストをポスト時に処理するtest-db-clientのホストはHTMLを生成しているホストと異なる場合があります。
+- テキストボックスとADDボタン
+  テキストボックスにテキストを入力してADDボタンを押すとtest-dbサーバーにデータを追加します。
+
 ## test-db
 DBコンテナとして作成しました。（実際はただのjsonファイルを読み書きするAPIサーバーです。  
 8000番ポートにHTTPアクセスするとjsonの内容を取得したり追記したり出来ます。  
