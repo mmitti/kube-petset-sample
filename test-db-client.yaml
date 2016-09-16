@@ -19,9 +19,9 @@ spec:
         image: mmitti/test-db-client
         env:
         - name: API
-          value: test-db.default.svc.mmitti.info
+          value: test-db.default.svc.mmitti.info:8000
         - name: API_POD
-          value: test-db.default.svc.mmitti.info
+          value: test-db.default.svc.mmitti.info:8000
 ---
 kind: Service
 apiVersion: v1

@@ -17,7 +17,7 @@ def index():
 def room(name):
     r = req.get('http://'+name+'.'+api_pod+"/get")
     r2 = req.get('http://'+name+'.'+api_pod+"/info")
-    return render_template('index.html', view_host=gethostname() data=r.json(),
+    return render_template('index.html', view_host=gethostname(), data=r.json(),
         info=r2.json(), url=url_for("post", _external=True), room=name)
 
 @app.route('/post', methods=['POST'])
